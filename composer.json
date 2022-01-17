@@ -2,7 +2,7 @@
     "name": "sypex/geo",
     "description": "Sypex deo actualized",
     "type": "library",
-    "license": "BSD",
+    "license": "BSD-2-Clause",
     "require": {
         "php": ">=7.1"
     },
