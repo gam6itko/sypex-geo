@@ -6,9 +6,17 @@
     "require": {
         "php": ">=7.1"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+    },
     "autoload": {
         "psr-4": {
             "Sypex\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sypex\\Tests\\": "tests"
         }
     }
 }

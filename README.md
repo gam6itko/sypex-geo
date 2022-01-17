@@ -1,10 +1,16 @@
-# Установка
+# sypex/geo
+
+Актуализированная бибилиотека с сайта <https://sypexgeo.net/ru/>.
+
+- composer
+- `throw` вместо `die`
+- есть тесты
+
+## Установка
 
 ```
 composer require sypex/geo
 ```
-
-# Примеры использования
 
 ## Скачка файла БД
 
@@ -13,10 +19,13 @@ composer require sypex/geo
 wget https://sypexgeo.net/files/SxGeoCountry.zip
 unzip SxGeoCountry.zip
 rm SxGeoCountry.zip
+
+wget https://sypexgeo.net/files/SxGeoCity_utf8.zip
+unzip SxGeoCity_utf8.zip
+rm SxGeoCity_utf8.zip
 ```
 
-Скопировать SxGeo.php и SxGeo.dat (или SxGeoCity.dat или другие базы <http://sypexgeo.net/ru/download/>) на сервер
-
+## Примеры использования
 
 ```php
 $filepath = 'SxGeo.dat';
