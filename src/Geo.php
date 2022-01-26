@@ -294,7 +294,7 @@ class Geo
     public function __construct($db_file = 'SxGeo.dat', $type = Mode::FILE)
     {
         if (!file_exists($db_file)) {
-            throw new \LogicException('File does not exists');
+            throw new \LogicException("Data file `{$db_file}` does not exists");
         }
 
         $this->fh = fopen($db_file, 'rb');
