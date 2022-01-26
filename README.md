@@ -3,6 +3,8 @@
 Актуализированная бибилиотека с сайта <https://sypexgeo.net/ru/>.
 
 - composer
+- PSR-2
+- PSR-4
 - `throw` вместо `die`
 - есть тесты
 
