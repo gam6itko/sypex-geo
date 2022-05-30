@@ -494,7 +494,7 @@ class Geo
         $pos = 0;
         foreach ($pack as $p) {
             [$type, $name] = explode(':', $p);
-            $type0 = substr($type, 0);
+            $type0 = substr($type, 0, 1);
             if ($empty) {
                 $unpacked[$name] = $type0 == 'b' || $type0 == 'c' ? '' : 0;
                 continue;
