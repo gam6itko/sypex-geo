@@ -32,7 +32,7 @@ rm SxGeoCity_utf8.zip
 ```php
 $filepath = 'SxGeo.dat';
 $geo = new Geo($filepath); // by default SxGeo.dat
-$geo = new SxGeo($filepath, Mode::BATCH | Mode::MEMORY); // Самый быстрый режим пакетной обработки
+$geo = new SxGeo($filepath, Mode::BATCH | Mode::MEMORY); // the fastest way
 
 // Get country (SxGeo Country)
 //
