@@ -1,22 +1,22 @@
 # sypex/geo
 
-Актуализированная бибилиотека с сайта <https://sypexgeo.net/ru/>.
+Actualized library from <https://sypexgeo.net/ru/>.
 
 - composer
 - PSR-2
 - PSR-4
 - `throw` вместо `die`
-- есть тесты
+- tests
 
-## Установка
+## Installation
 
 ```
 composer require sypex/geo
 ```
 
-## Скачка файла БД
+## Download Database file
 
-Получаем файл `SxGeo.dat`
+
 ```shell
 wget https://sypexgeo.net/files/SxGeoCountry.zip
 unzip SxGeoCountry.zip
@@ -27,29 +27,29 @@ unzip SxGeoCity_utf8.zip
 rm SxGeoCity_utf8.zip
 ```
 
-## Примеры использования
+## Usage
 
 ```php
 $filepath = 'SxGeo.dat';
-$geo = new Geo($filepath); // Режим по умолчанию, файл бд SxGeo.dat
+$geo = new Geo($filepath); // by default SxGeo.dat
 $geo = new SxGeo($filepath, Mode::BATCH | Mode::MEMORY); // Самый быстрый режим пакетной обработки
 
-// Определяем страну c БД содержащими страны (SxGeo Country)
+// Get country (SxGeo Country)
 //
-// возвращает двухзначный ISO-код страны
+// 2-letter ISO code of country
 $country = $geo->getCountry($ip);
-// возвращает номер страны
+// number of country
 $geo->getCountryId($ip);
 
-// Определяем город (SxGeo City, SxGeo City Max)
+// get city (SxGeo City, SxGeo City Max)
 //
-// возвращает краткую информацию, без названия региона, страны и временной зоны
+// short information, without region name, country and timezone
 $geo->getCity($ip);
-// возвращает полную информацию о городе, регионе и стране
+// full city information
 $geo->getCityFull($ip);
-// выполняет getCountry либо getCity в зависимости от типа базы
+// calls getCountry or getCity depending on the type of base
 $city = $geo->get($ip);
 
-// Если нужно осводить рессурсы - удаляем объект
+// free resource
 unset($geo);
 ```
