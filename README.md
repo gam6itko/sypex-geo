@@ -5,7 +5,7 @@ Actualized library from <https://sypexgeo.net/ru/>.
 - composer
 - PSR-2
 - PSR-4
-- `throw` вместо `die`
+- `throw` instead of `die`
 - tests
 
 ## Installation
