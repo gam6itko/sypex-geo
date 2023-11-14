@@ -584,10 +584,17 @@ class Geo
         return $this->max_city ? $this->getCity($ip) : $this->getCountry($ip);
     }
 
+    /**
+     * @param string $ip
+     * @return false|string
+     */
     public function getCountry($ip)
     {
         if ($this->max_city) {
             $tmp = $this->parseCity($this->get_num($ip));
+            if (false === $tmp) {
+                return false;
+            }
             return $tmp['country']['iso'];
         }
         return $this->id2iso[$this->get_num($ip)];
