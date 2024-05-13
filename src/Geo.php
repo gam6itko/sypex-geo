@@ -291,6 +291,14 @@ class Geo
     public $batch_mode = false;
     public $memory_mode = false;
 
+    private $b_idx_len;
+    private $id_len;
+    private $block_len;
+    private $max_region;
+    private $max_city;
+    private $max_country;
+    private $pack;
+
     public function __construct($db_file = 'SxGeo.dat', $type = Mode::FILE)
     {
         if (!file_exists($db_file)) {
@@ -300,7 +308,7 @@ class Geo
         $this->fh = fopen($db_file, 'rb');
         // Сначала убеждаемся, что есть файл базы данных
         $header = fread($this->fh, 40); // В версии 2.2 заголовок увеличился на 8 байт
-        if (substr($header, 0, 3) != 'SxG') {
+        if (!str_starts_with($header, 'SxG')) {
             throw new \RuntimeException("Can't open {$db_file}");
         }
 
