@@ -1,13 +1,13 @@
-<phpunit bootstrap="vendor/autoload.php">
+<phpunit
+        bootstrap="vendor/autoload.php"
+        displayDetailsOnTestsThatTriggerWarnings="true"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+
+>
     <testsuites>
         <testsuite name="sypex-geo">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
 </phpunit>
