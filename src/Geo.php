@@ -14,22 +14,66 @@ namespace Sypex;
 
 class Geo
 {
+    /**
+     * @var false|resource
+     */
     protected $fh;
     protected $ip1c;
+    /**
+     * @var false|array
+     */
     protected $info;
+    /**
+     * @var mixed
+     */
     protected $range;
+    /**
+     * @var false|int
+     */
     protected $db_begin;
+    /**
+     * @var false|string
+     */
     protected $b_idx_str;
+    /**
+     * @var false|string
+     */
     protected $m_idx_str;
+    /**
+     * @var array|false
+     */
     protected $b_idx_arr;
+    /**
+     * @var array|false
+     */
     protected $m_idx_arr;
+    /**
+     * @var mixed
+     */
     protected $m_idx_len;
+    /**
+     * @var mixed
+     */
     protected $db_items;
+    /**
+     * @var mixed
+     */
     protected $country_size;
+    /**
+     * @var false|string
+     */
     protected $db;
+    /**
+     * @var false|string
+     */
     protected $regions_db;
+    /**
+     * @var false|string
+     */
     protected $cities_db;
-
+    /**
+     * @var array
+     */
     public $id2iso = [
         '',
         'AP',
@@ -287,10 +331,47 @@ class Geo
         'BQ',
         'SS',
     ];
-
+    /**
+     * @var bool|int
+     */
     public $batch_mode = false;
+    /**
+     * @var bool|int
+     */
     public $memory_mode = false;
+    /**
+     * @var mixed
+     */
+    private $b_idx_len;
+    /**
+     * @var mixed
+     */
+    private $id_len;
+    /**
+     * @var int|mixed
+     */
+    private $block_len;
+    /**
+     * @var mixed
+     */
+    private $max_region;
+    /**
+     * @var mixed
+     */
+    private $max_city;
+    /**
+     * @var mixed
+     */
+    private $max_country;
+    /**
+     * @var false|string|string[]
+     */
+    private $pack;
 
+    /**
+     * @param string $db_file
+     * @param int $type
+     */
     public function __construct($db_file = 'SxGeo.dat', $type = Mode::FILE)
     {
         if (!file_exists($db_file)) {
@@ -342,6 +423,12 @@ class Geo
         $this->info['cities_begin'] = $this->info['regions_begin'] + $info['region_size'];
     }
 
+    /**
+     * @param $ipn
+     * @param $min
+     * @param $max
+     * @return false|string
+     */
     protected function search_idx($ipn, $min, $max)
     {
         if ($this->batch_mode) {
@@ -370,6 +457,13 @@ class Geo
         return $min;
     }
 
+    /**
+     * @param $str
+     * @param $ipn
+     * @param $min
+     * @param $max
+     * @return false|string
+     */
     protected function search_db($str, $ipn, $min, $max)
     {
         if ($max - $min > 1) {
@@ -389,7 +483,10 @@ class Geo
         }
         return hexdec(bin2hex(substr($str, $min * $this->block_len - $this->id_len, $this->id_len)));
     }
-
+    /**
+     * @param string $ip
+     * @return false|string
+     */
     public function get_num($ip)
     {
         $ip1n = (int) $ip; // Первый байт
@@ -432,6 +529,12 @@ class Geo
         }
     }
 
+    /**
+     * @param $seek
+     * @param $max
+     * @param $type
+     * @return array
+     */
     protected function readData($seek, $max, $type)
     {
         $raw = '';
@@ -446,6 +549,11 @@ class Geo
         return $this->unpack($this->pack[$type], $raw);
     }
 
+    /**
+     * @param $seek
+     * @param bool $full
+     * @return array|false
+     */
     protected function parseCity($seek, $full = false)
     {
         if (!$this->pack) {
@@ -486,6 +594,11 @@ class Geo
         }
     }
 
+    /**
+     * @param $pack
+     * @param string $item
+     * @return array
+     */
     protected function unpack($pack, $item = '')
     {
         $unpacked = [];
@@ -578,7 +691,10 @@ class Geo
         }
         return $unpacked;
     }
-
+    /**
+     * @param string $ip
+     * @return false|string
+     */
     public function get($ip)
     {
         return $this->max_city ? $this->getCity($ip) : $this->getCountry($ip);
@@ -600,6 +716,10 @@ class Geo
         return $this->id2iso[$this->get_num($ip)];
     }
 
+    /**
+     * @param string $ip
+     * @return false|string
+     */
     public function getCountryId($ip)
     {
         if ($this->max_city) {
@@ -609,18 +729,29 @@ class Geo
         return $this->get_num($ip);
     }
 
+    /**
+     * @param string $ip
+     * @return false|string
+     */
     public function getCity($ip)
     {
         $seek = $this->get_num($ip);
         return $seek ? $this->parseCity($seek) : false;
     }
 
+    /**
+     * @param string $ip
+     * @return false|string
+     */
     public function getCityFull($ip)
     {
         $seek = $this->get_num($ip);
         return $seek ? $this->parseCity($seek, 1) : false;
     }
 
+    /**
+     * @return false|string
+     */
     public function about(): array
     {
         $charset = ['utf-8', 'latin1', 'cp1251'];
