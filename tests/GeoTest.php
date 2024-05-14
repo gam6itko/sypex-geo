@@ -34,7 +34,7 @@ final class GeoTest extends TestCase
      * @covers ::getCity
      * @dataProvider dataGetCity
      */
-    public function testGetCity(string $ip, bool|string $expected): void
+    public function testGetCity(string $ip, $expected): void
     {
         $geo = new Geo(self::FILE_PATH);
         self::assertSame($expected, $geo->getCity($ip));
