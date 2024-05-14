@@ -44,4 +44,16 @@ final class GeoTest extends TestCase
     {
         yield ['8.8.8.8', false];
     }
+
+    /**
+     * @covers ::about
+     */
+    public function testAbout(): void
+    {
+        $geo = new Geo(self::FILE_PATH);
+        $about = $geo->about();
+        self::assertArrayHasKey('Created', $about);
+        self::assertArrayHasKey('Charset', $about);
+        self::assertArrayHasKey('Type', $about);
+    }
 }
