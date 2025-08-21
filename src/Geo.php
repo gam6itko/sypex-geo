@@ -748,9 +748,31 @@ class Geo
         $seek = $this->get_num($ip);
         return $seek ? $this->parseCity($seek, 1) : false;
     }
-
+        
     /**
-     * @return false|string
+     * @return array{
+     *     Created: string,
+     *     Timestamp: int,
+     *     Charset: string,
+     *     Type: string,
+     *     Byte Index: int,
+     *     Main Index: int,
+     *     Blocks In Index Item: int,
+     *     IP Blocks: int,
+     *     Block Size: int,
+     *     City: array{
+     *         Max Length: int,
+     *         Total Size: int
+     *     },
+     *     Region: array{
+     *         Max Length: int,
+     *         Total Size: int
+     *     },
+     *     Country: array{
+     *         Max Length: int,
+     *         Total Size: int
+     *     }
+     * }
      */
     public function about(): array
     {
